@@ -2,8 +2,9 @@
 
 ## Credits
 
-- Created by Jared Rigby ([itch](https://jazibobs.itch.io/) / [github](https://github.com/jazibobs) / [twitter]()).
+- Created by Jared Rigby ([itch](https://jazibobs.itch.io/) / [github](https://github.com/jazibobs) / [twitter](https://twitter.com/jazibobs)).
 
-## Special thanks
+## Special thanks to...
 
-- Match-3 tiles by Davit Masia ([itch](https://kronbits.itch.io/) / [patreon](https://www.patreon.com/davitmasia) / [twitter](https://twitter.com/DavitMasia)).
+- Godot tutorials by James Taft ([[youtube](https://www.youtube.com/mistertaftcreates) / [twitter](https://twitter.com/taftcreates))
+- Match-3 artwork by Davit Masia ([itch](https://kronbits.itch.io/) / [patreon](https://www.patreon.com/davitmasia) / [twitter](https://twitter.com/DavitMasia)).

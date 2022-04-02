@@ -85,3 +85,5 @@ __meta__ = {
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 scale = Vector2( 1.6, 1.6 )
 frames = SubResource( 17 )
+
+[node name="MovingTween" type="Tween" parent="."]
