@@ -20,6 +20,8 @@ height = 10
 x_start = 64
 y_start = 800
 offset = 64
+new_piece_offset = 5
+empty_spaces = PoolVector2Array( 0, 0, 7, 0, 0, 9, 7, 9, 3, 4, 4, 4, 3, 5, 4, 5 )
 
 [node name="DestroyPieces" type="Timer" parent="."]
 wait_time = 0.5
@@ -29,5 +31,10 @@ one_shot = true
 wait_time = 0.5
 one_shot = true
 
+[node name="RefillGrid" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
 [connection signal="timeout" from="DestroyPieces" to="Grid" method="_on_DestroyPieces_timeout"]
 [connection signal="timeout" from="CollapseGrid" to="Grid" method="_on_CollapseGrid_timeout"]
+[connection signal="timeout" from="RefillGrid" to="Grid" method="_on_RefillGrid_timeout"]
