@@ -4,9 +4,9 @@ export (String) var colour;
 var possible_colours = ['sky', 'blue', 'pink', 'purple', 'red', 'orange', 'green', 'grey'];
 var matched = false;
 
-func init(colour):
-	self.colour = colour;
-	var frame = possible_colours.find(colour);
+func init(received_colour):
+	self.colour = received_colour;
+	var frame = possible_colours.find(received_colour);
 	$AnimatedSprite.frame = frame;
 
 

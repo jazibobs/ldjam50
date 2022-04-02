@@ -35,7 +35,7 @@ func _ready():
 	spawn_pieces()
 
 
-func _process(delta):
+func _process(_delta):
 	if state == move:
 		touch_input()
 
