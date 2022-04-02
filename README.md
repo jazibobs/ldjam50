@@ -1,6 +1,8 @@
-# Credits
+# LDJam 50 - Delay the inevitable
 
-- Created by Jared Rigby ([itch]() / [github]() / [twitter]()).
+## Credits
+
+- Created by Jared Rigby ([itch](https://jazibobs.itch.io/) / [github](https://github.com/jazibobs) / [twitter]()).
 
 ## Special thanks
 
