@@ -3,7 +3,7 @@
 		"colours": ["pink", "blue", "green", "yellow"],
 		"empty": [],
 		"timer": 99,
-		"matches" : 20
+		"matches" : 100
 	},
 	"L2": {
 		"colours": ["pink", "blue", "green", "yellow"],
@@ -14,7 +14,7 @@
 			[7, 9]
 		],
 		"timer": 99,
-		"matches" : 20
+		"matches" : 100
 	},
 	"L3": {
 		"colours": ["pink", "blue", "green", "yellow", "red"],
@@ -29,7 +29,7 @@
 			[4, 5]
 		],
 		"timer": 99,
-		"matches" : 20
+		"matches" : 100
 	},
 	"L4": {
 		"colours": ["pink", "blue", "green", "yellow", "red", "purple"],
@@ -44,7 +44,7 @@
 			[4, 5]
 		],
 		"timer": 99,
-		"matches" : 20
+		"matches" : 100
 	},
 	"L5": {
 		"colours": ["pink", "blue", "green", "yellow", "red", "purple", "white"],
@@ -52,14 +52,14 @@
 			[1, 1],
 			[6, 1],
 			[1, 8],
-			[6, 6],
+			[6, 8],
 			[3, 4],
 			[4, 4],
 			[3, 5],
 			[4, 5]
 		],
 		"timer": 99,
-		"matches" : 20
+		"matches" : 100
 	},
 	"L6": {
 		"colours": ["pink", "blue", "green", "yellow", "red", "purple", "white", "sky"],
@@ -67,13 +67,13 @@
 			[1, 1],
 			[6, 1],
 			[1, 8],
-			[6, 6],
+			[6, 8],
 			[3, 4],
 			[4, 4],
 			[3, 5],
 			[4, 5]
 		],
 		"timer": 99,
-		"matches" : 20
+		"matches" : 100
 	}
 }

@@ -2,4 +2,9 @@ extends Control
 
 
 func _on_BackButton_pressed():
-	get_tree().change_scene("res://Scenes/Title.tscn")
+	$CreditsAnimation.play("fade_out")
+
+
+func _on_CreditsAnimation_animation_finished(anim_name):
+	if anim_name == "fade_out":
+		get_tree().change_scene("res://Scenes/Title.tscn")

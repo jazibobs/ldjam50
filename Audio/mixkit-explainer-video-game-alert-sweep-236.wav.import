@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/mixkit-explainer-video-game-alert-sweep-236.wav-dd1978620ed378229004acc005e7a46d.sample"
+
+[deps]
+
+source_file="res://Audio/mixkit-explainer-video-game-alert-sweep-236.wav"
+dest_files=[ "res://.import/mixkit-explainer-video-game-alert-sweep-236.wav-dd1978620ed378229004acc005e7a46d.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

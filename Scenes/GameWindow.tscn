@@ -1,9 +1,148 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Sprites/paper-bg.jpg" type="Texture" id=1]
 [ext_resource path="res://Scripts/Grid.gd" type="Script" id=2]
 [ext_resource path="res://Sprites/ButtonSmall1.png" type="Texture" id=3]
 [ext_resource path="res://Sprites/ButtonSmall2.png" type="Texture" id=4]
+[ext_resource path="res://Audio/mixkit-explainer-video-game-alert-sweep-236.wav" type="AudioStream" id=5]
+[ext_resource path="res://Objects/Monster.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Sprites/City.png" type="Texture" id=7]
+[ext_resource path="res://Sprites/ButtonLarge1.png" type="Texture" id=8]
+
+[sub_resource type="Animation" id=1]
+resource_name = "fade_out"
+length = 2.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Grid:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("NextLevelContent:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 1.5, 2.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "full_fade"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Grid:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("PlayerInfo:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("NextLevelContent:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("GameOverContent:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "game_over_fade"
+length = 2.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Grid:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("GameOverContent:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 1.5, 2.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "level_fade_in"
+tracks/0/type = "value"
+tracks/0/path = NodePath("NextLevelContent:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Grid:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
 
 [node name="MainGame" type="Node2D"]
 __meta__ = {
@@ -27,10 +166,13 @@ script = ExtResource( 2 )
 width = 8
 height = 10
 x_start = 64
-y_start = 850
+y_start = 790
 offset = 64
 new_piece_offset = 5
 empty_spaces = PoolVector2Array( 0, 0, 7, 0, 0, 9, 7, 9, 3, 4, 4, 4, 3, 5, 4, 5 )
+
+[node name="ClearSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
 
 [node name="DestroyPieces" type="Timer" parent="."]
 wait_time = 0.5
@@ -44,7 +186,53 @@ one_shot = true
 wait_time = 0.5
 one_shot = true
 
-[node name="Matches" type="TextureRect" parent="."]
+[node name="Seconds" type="Timer" parent="."]
+
+[node name="PlayerInfo" type="Node2D" parent="."]
+
+[node name="Monster" parent="PlayerInfo" instance=ExtResource( 6 )]
+position = Vector2( -135.211, 943.842 )
+scale = Vector2( 0.652994, 0.652994 )
+
+[node name="City" type="Sprite" parent="PlayerInfo"]
+position = Vector2( 438, 944 )
+texture = ExtResource( 7 )
+
+[node name="Timer" type="TextureRect" parent="PlayerInfo"]
+margin_left = 385.0
+margin_top = 25.0
+margin_right = 554.0
+margin_bottom = 165.0
+texture = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TimerText" type="RichTextLabel" parent="PlayerInfo/Timer"]
+margin_left = 59.0
+margin_top = 64.0
+margin_right = 104.0
+margin_bottom = 96.0
+rect_scale = Vector2( 3, 3 )
+custom_colors/default_color = Color( 0, 0, 0, 1 )
+text = "99"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TimerLabel" type="RichTextLabel" parent="PlayerInfo/Timer"]
+margin_left = 56.0
+margin_top = 32.0
+margin_right = 103.0
+margin_bottom = 47.0
+rect_scale = Vector2( 2, 2 )
+custom_colors/default_color = Color( 0, 0, 0, 1 )
+text = "Time"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Matches" type="TextureRect" parent="PlayerInfo"]
 margin_left = 16.0
 margin_top = 27.0
 margin_right = 193.0
@@ -54,11 +242,11 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="MatchesText" type="RichTextLabel" parent="Matches"]
+[node name="MatchesText" type="RichTextLabel" parent="PlayerInfo/Matches"]
 margin_left = 62.0
-margin_top = 45.0
+margin_top = 62.0
 margin_right = 107.0
-margin_bottom = 77.0
+margin_bottom = 94.0
 rect_scale = Vector2( 3, 3 )
 custom_colors/default_color = Color( 0, 0, 0, 1 )
 text = "20"
@@ -66,52 +254,113 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="MatchesLabel" type="RichTextLabel" parent="Matches"]
-margin_left = 7.0
-margin_top = 139.0
-margin_right = 80.0
-margin_bottom = 154.0
-rect_scale = Vector2( 3, 3 )
+[node name="MatchesLabel" type="RichTextLabel" parent="PlayerInfo/Matches"]
+margin_left = 48.0
+margin_top = 30.0
+margin_right = 93.0
+margin_bottom = 45.0
+rect_scale = Vector2( 2, 2 )
 custom_colors/default_color = Color( 0, 0, 0, 1 )
-text = "Matches"
+text = "Health"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Timer" type="TextureRect" parent="."]
-margin_left = 385.0
-margin_top = 27.0
-margin_right = 554.0
-margin_bottom = 167.0
-texture = ExtResource( 4 )
+[node name="DayInfo" type="RichTextLabel" parent="PlayerInfo"]
+margin_left = 235.0
+margin_top = 74.0
+margin_right = 277.0
+margin_bottom = 93.0
+rect_scale = Vector2( 3, 3 )
+custom_colors/default_color = Color( 0, 0, 0, 1 )
+text = "Day 1"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TimerText" type="RichTextLabel" parent="Timer"]
-margin_left = 59.0
-margin_top = 52.0
-margin_right = 104.0
-margin_bottom = 84.0
-rect_scale = Vector2( 3, 3 )
+[node name="NextLevelContent" type="Node2D" parent="."]
+visible = false
+
+[node name="NextLevel" type="TouchScreenButton" parent="NextLevelContent"]
+position = Vector2( 150, 649 )
+rotation = 0.0698132
+normal = ExtResource( 8 )
+
+[node name="RichTextLabel" type="RichTextLabel" parent="NextLevelContent/NextLevel"]
+margin_left = 59.4112
+margin_top = 51.7761
+margin_right = 151.411
+margin_bottom = 82.7761
+rect_rotation = -4.0
+rect_scale = Vector2( 2.5, 2.5 )
 custom_colors/default_color = Color( 0, 0, 0, 1 )
-text = "99"
+text = "Next Level"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TimerLabel" type="RichTextLabel" parent="Timer"]
-margin_left = 33.0
-margin_top = 139.0
-margin_right = 80.0
-margin_bottom = 154.0
+[node name="RichTextLabel" type="RichTextLabel" parent="NextLevelContent"]
+margin_left = 76.0
+margin_top = 367.0
+margin_right = 230.0
+margin_bottom = 458.0
+rect_rotation = -4.0
 rect_scale = Vector2( 3, 3 )
 custom_colors/default_color = Color( 0, 0, 0, 1 )
-text = "Timer"
+text = "The city is saved!
+
+You cleared enough blocks to keep him at bay, for now..."
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="GameOverContent" type="Node2D" parent="."]
+visible = false
+modulate = Color( 1, 1, 1, 0 )
+
+[node name="TitleButton" type="TouchScreenButton" parent="GameOverContent"]
+position = Vector2( 150, 649 )
+rotation = 0.0698132
+normal = ExtResource( 8 )
+
+[node name="RichTextLabel" type="RichTextLabel" parent="GameOverContent/TitleButton"]
+margin_left = 59.4112
+margin_top = 51.7761
+margin_right = 151.411
+margin_bottom = 82.7761
+rect_rotation = -4.0
+rect_scale = Vector2( 2.5, 2.5 )
+custom_colors/default_color = Color( 0, 0, 0, 1 )
+text = "Try again"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel" type="RichTextLabel" parent="GameOverContent"]
+margin_left = 76.0
+margin_top = 367.0
+margin_right = 230.0
+margin_bottom = 458.0
+rect_rotation = -4.0
+rect_scale = Vector2( 3, 3 )
+custom_colors/default_color = Color( 0, 0, 0, 1 )
+text = "And just like that it's over.
+
+I guess you can't delay the inevitable..."
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="EndOfLevelAnimation" type="AnimationPlayer" parent="."]
+anims/fade_out = SubResource( 1 )
+anims/full_fade = SubResource( 3 )
+anims/game_over_fade = SubResource( 2 )
+anims/level_fade_in = SubResource( 4 )
 
 [connection signal="timeout" from="DestroyPieces" to="Grid" method="_on_DestroyPieces_timeout"]
 [connection signal="timeout" from="CollapseGrid" to="Grid" method="_on_CollapseGrid_timeout"]
 [connection signal="timeout" from="RefillGrid" to="Grid" method="_on_RefillGrid_timeout"]
+[connection signal="timeout" from="Seconds" to="Grid" method="_on_Seconds_timeout"]
+[connection signal="pressed" from="NextLevelContent/NextLevel" to="Grid" method="_on_NextLevel_pressed"]
+[connection signal="pressed" from="GameOverContent/TitleButton" to="Grid" method="_on_TitleButton_pressed"]
+[connection signal="animation_finished" from="EndOfLevelAnimation" to="Grid" method="_on_EndOfLevelAnimation_animation_finished"]

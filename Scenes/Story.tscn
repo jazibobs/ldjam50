@@ -83,7 +83,7 @@ margin_bottom = 389.0
 rect_rotation = -4.0
 rect_scale = Vector2( 3, 3 )
 custom_colors/default_color = Color( 0, 0, 0, 1 )
-text = "Our hometown will be destroyed within days
+text = "Your hometown will be destroyed within days
 
 Only matching blocks of three can slow down what's coming..."
 __meta__ = {

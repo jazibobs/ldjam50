@@ -1,10 +1,11 @@
 extends Node2D
 
-enum {wait, move}
+enum {wait, move, win, lose, next_level, game_over}
 var state
 var current_level = 1
 var matches_needed = 20
 var time_remaining = 99
+var monster_step = 5
 
 # Grid vars
 export (int) var width
@@ -37,25 +38,64 @@ func _ready():
 	load_level_data(current_level)
 
 
+func _process(_delta):
+	if state == move:
+		touch_input()
+	elif state == win:
+		state = next_level
+		end_of_level(current_level)
+	elif state == lose:
+		state = next_level
+		end_of_level(-1)
+		
+	if matches_needed <= 0 && time_remaining > 0 && state != next_level:
+		state = win
+	elif time_remaining < 0 && state != next_level:
+		state = lose
+
+
 func load_level_data(level_number):
-	possible_colours = LevelData.level[level_number].colours
+	var level_key = "L" + str(level_number)
+	possible_colours = LevelData.level[level_key].colours
 	
 	while !empty_spaces.empty():
 		empty_spaces.remove(0)
 	
-	for cell in LevelData.level[level_number].empty:
+	for cell in LevelData.level[level_key].empty:
 		empty_spaces.append(Vector2(cell[0], cell[1]))
 	
-	matches_needed = LevelData.level[level_number].matches
-	time_remaining = LevelData.level[level_number].timer
+	get_parent().get_node("PlayerInfo/DayInfo").text = "Day " + str(level_number)
+	
+	matches_needed = LevelData.level[level_key].matches
+	get_parent().get_node("PlayerInfo/Matches/MatchesText").text = str(matches_needed)
+	
+	time_remaining = LevelData.level[level_key].timer
+	get_parent().get_node("PlayerInfo/Timer/TimerText").text = str(time_remaining)
+	get_parent().get_node("Seconds").start()
+	
+	# The x offset travelled by the monster with each passing of the timer
+	# Monster start pos -135, end pos 320
+	monster_step = (320 - -135) / time_remaining
 	
 	all_pieces = make_pieces_array()
 	spawn_pieces()
+	move_checked = false
 
 
-func _process(_delta):
-	if state == move:
-		touch_input()
+func end_of_level(level):
+	get_parent().get_node("DestroyPieces").stop()
+	get_parent().get_node("CollapseGrid").stop()
+	get_parent().get_node("RefillGrid").stop()
+	get_parent().get_node("Seconds").stop()
+	if level == -1:
+		get_parent().get_node("GameOverContent").visible = true
+		get_parent().get_node("EndOfLevelAnimation").play("game_over_fade")
+	else:
+		get_parent().get_node("NextLevelContent").visible = true
+		get_parent().get_node("EndOfLevelAnimation").play("fade_out")
+		get_parent().get_node("PlayerInfo/Monster/MonsterWalk").stop()
+		get_parent().get_node("PlayerInfo/Monster").set_flip_h(true)
+		get_parent().get_node("PlayerInfo/Monster").move(Vector2(-500, 1000))
 
 
 func make_pieces_array():
@@ -75,6 +115,10 @@ func restricted_movement(place):
 
 
 func spawn_pieces():
+	for child in get_node(".").get_children():
+		get_node(".").remove_child(child)
+		child.queue_free()
+		
 	for i in width:
 		for j in height:
 			if !restricted_movement(Vector2(i, j)):
@@ -129,16 +173,20 @@ func destroy_matched():
 			if all_pieces[i][j] != null:
 				if all_pieces[i][j].matched:
 					was_matched = true
+					matches_needed -= 1
+					get_parent().get_node("PlayerInfo/Matches/MatchesText").text = str(matches_needed if matches_needed > 0 else 0)
 					all_pieces[i][j].queue_free()
 					all_pieces[i][j] = null
 	move_checked = true
 	if was_matched:
+		get_parent().get_node("ClearSound").play()
 		get_parent().get_node("CollapseGrid").start()
 	else:
 		swap_back()
 
 
 func collapse_columns():
+	get_parent().get_node("PlayerInfo/Monster/PainAudio").play()
 	for i in width:
 		for j in height:
 			if all_pieces[i][j] == null && !restricted_movement(Vector2(i, j)):
@@ -279,7 +327,41 @@ func _on_DestroyPieces_timeout():
 
 func _on_CollapseGrid_timeout():
 	collapse_columns()
+	get_parent().get_node("PlayerInfo/Monster").modulate = Color(1, 0.5, 0.5)
+	get_parent().get_node("PlayerInfo/Matches").modulate = Color(1, 0.5, 0.5)
 
 
 func _on_RefillGrid_timeout():
 	refill_columns()
+	get_parent().get_node("PlayerInfo/Monster").modulate = Color(1, 1 ,1)
+	get_parent().get_node("PlayerInfo/Matches").modulate = Color(1, 1, 1)
+
+
+func _on_Seconds_timeout():
+	time_remaining -= 1
+	get_parent().get_node("PlayerInfo/Timer/TimerText").text = str(time_remaining if time_remaining > 0 else 0)
+	
+	var monster_location = get_parent().get_node("PlayerInfo/Monster").position
+	var monster_new_location = Vector2(monster_location.x + monster_step, monster_location.y)
+	get_parent().get_node("PlayerInfo/Monster").move(monster_new_location)
+
+
+func _on_TitleButton_pressed():
+	get_parent().get_node("EndOfLevelAnimation").play("full_fade")
+
+
+func _on_NextLevel_pressed():
+	current_level += 1
+	load_level_data(current_level)
+	get_parent().get_node("PlayerInfo/Monster").move(Vector2(-135, 943))
+	get_parent().get_node("PlayerInfo/Monster").set_flip_h(false)
+	get_parent().get_node("PlayerInfo/Monster/MonsterWalk").play()
+	get_parent().get_node("EndOfLevelAnimation").play("level_fade_in")
+	state = move
+
+
+func _on_EndOfLevelAnimation_animation_finished(anim_name):
+	if anim_name == "full_fade":
+		get_tree().change_scene("res://Scenes/Title.tscn")
+	elif anim_name == "level_fade_in":
+		get_parent().get_node("NextLevelContent").visible = false
