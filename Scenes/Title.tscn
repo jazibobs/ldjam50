@@ -1,49 +1,98 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Sprites/Monster.png" type="Texture" id=1]
 [ext_resource path="res://Sprites/TitleCard.png" type="Texture" id=2]
-[ext_resource path="res://Sprites/bg.png" type="Texture" id=3]
+[ext_resource path="res://Sprites/paper-bg.jpg" type="Texture" id=3]
 [ext_resource path="res://Sprites/ButtonLarge1.png" type="Texture" id=4]
+[ext_resource path="res://Sprites/ButtonLarge2.png" type="Texture" id=5]
+[ext_resource path="res://Scripts/Title.gd" type="Script" id=6]
+
+[sub_resource type="Animation" id=1]
+resource_name = "fade_out"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("UIContainer:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
 
 [node name="Title" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+script = ExtResource( 6 )
 __meta__ = {
 "_edit_horizontal_guides_": [ 960.0, 64.0 ],
 "_edit_use_anchors_": false,
 "_edit_vertical_guides_": [ 512.0, 64.0, 288.0 ]
 }
 
-[node name="TextureRect" type="TextureRect" parent="."]
-margin_right = 576.0
-margin_bottom = 1024.0
+[node name="TextureRect2" type="TextureRect" parent="."]
+margin_left = -174.0
+margin_top = -180.0
+margin_right = 3586.0
+margin_bottom = 5460.0
+rect_scale = Vector2( 0.25, 0.25 )
 texture = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="StartButton" type="TouchScreenButton" parent="."]
-position = Vector2( 150, 673 )
+[node name="UIContainer" type="Node2D" parent="."]
+
+[node name="Monster" type="Sprite" parent="UIContainer"]
+position = Vector2( 288, 245 )
+texture = ExtResource( 1 )
+
+[node name="Title" type="Sprite" parent="UIContainer"]
+position = Vector2( 289, 498 )
+texture = ExtResource( 2 )
+
+[node name="StartButton" type="TouchScreenButton" parent="UIContainer"]
+position = Vector2( 150, 646 )
 rotation = 0.0698132
 normal = ExtResource( 4 )
 
-[node name="RichTextLabel" type="RichTextLabel" parent="StartButton"]
-margin_left = 77.147
-margin_top = 56.7567
-margin_right = 151.147
-margin_bottom = 71.7567
+[node name="RichTextLabel" type="RichTextLabel" parent="UIContainer/StartButton"]
+margin_left = 59.4112
+margin_top = 51.7761
+margin_right = 151.411
+margin_bottom = 82.7761
 rect_rotation = -4.0
-rect_scale = Vector2( 2, 2 )
+rect_scale = Vector2( 2.5, 2.5 )
 custom_colors/default_color = Color( 0, 0, 0, 1 )
 text = "Start Game"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Monster" type="Sprite" parent="."]
-position = Vector2( 288, 295 )
-texture = ExtResource( 1 )
+[node name="CreditsButton" type="TouchScreenButton" parent="UIContainer"]
+position = Vector2( 139, 769 )
+rotation = 0.0872665
+normal = ExtResource( 5 )
 
-[node name="Title" type="Sprite" parent="."]
-position = Vector2( 289, 532 )
-texture = ExtResource( 2 )
+[node name="RichTextLabel2" type="RichTextLabel" parent="UIContainer/CreditsButton"]
+margin_left = 107.0
+margin_top = 63.0
+margin_right = 171.0
+margin_bottom = 90.0
+rect_rotation = -4.0
+rect_scale = Vector2( 2.5, 2.5 )
+custom_colors/default_color = Color( 0, 0, 0, 1 )
+text = "Credits"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/fade_out = SubResource( 1 )
+
+[connection signal="pressed" from="UIContainer/StartButton" to="." method="_on_StartButton_pressed"]
+[connection signal="pressed" from="UIContainer/CreditsButton" to="." method="_on_CreditsButton_pressed"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

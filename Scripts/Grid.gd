@@ -2,6 +2,9 @@ extends Node2D
 
 enum {wait, move}
 var state
+var current_level = 1
+var matches_needed = 20
+var time_remaining = 99
 
 # Grid vars
 export (int) var width
@@ -14,7 +17,7 @@ export (int) var new_piece_offset
 export (PoolVector2Array) var empty_spaces
 
 var piece_node = preload("res://Objects/Piece.tscn")
-var possible_colours = ['sky', 'blue', 'pink', 'purple', 'red', 'orange', 'green', 'grey']
+var possible_colours = ['pink', 'blue', 'green', 'yellow', 'red', 'purple', 'white', 'sky']
 var all_pieces = []
 
 var piece_one = null
@@ -31,6 +34,21 @@ var controlling = false
 func _ready():
 	state = move
 	randomize()
+	load_level_data(current_level)
+
+
+func load_level_data(level_number):
+	possible_colours = LevelData.level[level_number].colours
+	
+	while !empty_spaces.empty():
+		empty_spaces.remove(0)
+	
+	for cell in LevelData.level[level_number].empty:
+		empty_spaces.append(Vector2(cell[0], cell[1]))
+	
+	matches_needed = LevelData.level[level_number].matches
+	time_remaining = LevelData.level[level_number].timer
+	
 	all_pieces = make_pieces_array()
 	spawn_pieces()
 

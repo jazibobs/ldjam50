@@ -1,13 +1,22 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://Sprites/bg.png" type="Texture" id=1]
+[ext_resource path="res://Sprites/paper-bg.jpg" type="Texture" id=1]
 [ext_resource path="res://Scripts/Grid.gd" type="Script" id=2]
+[ext_resource path="res://Sprites/ButtonSmall1.png" type="Texture" id=3]
+[ext_resource path="res://Sprites/ButtonSmall2.png" type="Texture" id=4]
 
 [node name="MainGame" type="Node2D"]
+__meta__ = {
+"_edit_horizontal_guides_": [ 33.0 ],
+"_edit_vertical_guides_": [ 32.0, 544.0 ]
+}
 
 [node name="TextureRect" type="TextureRect" parent="."]
-margin_right = 40.0
-margin_bottom = 40.0
+margin_left = -174.0
+margin_top = -180.0
+margin_right = 3586.0
+margin_bottom = 5460.0
+rect_scale = Vector2( 0.25, 0.25 )
 texture = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -18,7 +27,7 @@ script = ExtResource( 2 )
 width = 8
 height = 10
 x_start = 64
-y_start = 800
+y_start = 850
 offset = 64
 new_piece_offset = 5
 empty_spaces = PoolVector2Array( 0, 0, 7, 0, 0, 9, 7, 9, 3, 4, 4, 4, 3, 5, 4, 5 )
@@ -34,6 +43,74 @@ one_shot = true
 [node name="RefillGrid" type="Timer" parent="."]
 wait_time = 0.5
 one_shot = true
+
+[node name="Matches" type="TextureRect" parent="."]
+margin_left = 16.0
+margin_top = 27.0
+margin_right = 193.0
+margin_bottom = 160.0
+texture = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MatchesText" type="RichTextLabel" parent="Matches"]
+margin_left = 62.0
+margin_top = 45.0
+margin_right = 107.0
+margin_bottom = 77.0
+rect_scale = Vector2( 3, 3 )
+custom_colors/default_color = Color( 0, 0, 0, 1 )
+text = "20"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MatchesLabel" type="RichTextLabel" parent="Matches"]
+margin_left = 7.0
+margin_top = 139.0
+margin_right = 80.0
+margin_bottom = 154.0
+rect_scale = Vector2( 3, 3 )
+custom_colors/default_color = Color( 0, 0, 0, 1 )
+text = "Matches"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Timer" type="TextureRect" parent="."]
+margin_left = 385.0
+margin_top = 27.0
+margin_right = 554.0
+margin_bottom = 167.0
+texture = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TimerText" type="RichTextLabel" parent="Timer"]
+margin_left = 59.0
+margin_top = 52.0
+margin_right = 104.0
+margin_bottom = 84.0
+rect_scale = Vector2( 3, 3 )
+custom_colors/default_color = Color( 0, 0, 0, 1 )
+text = "99"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TimerLabel" type="RichTextLabel" parent="Timer"]
+margin_left = 33.0
+margin_top = 139.0
+margin_right = 80.0
+margin_bottom = 154.0
+rect_scale = Vector2( 3, 3 )
+custom_colors/default_color = Color( 0, 0, 0, 1 )
+text = "Timer"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [connection signal="timeout" from="DestroyPieces" to="Grid" method="_on_DestroyPieces_timeout"]
 [connection signal="timeout" from="CollapseGrid" to="Grid" method="_on_CollapseGrid_timeout"]

@@ -14,6 +14,11 @@ config/name="Monster Match"
 config/description="Match as much as you can to delay the destruction of your city."
 config/icon="res://icon.png"
 
+[autoload]
+
+MusicManager="*res://Objects/MusicManager.tscn"
+LevelData="*res://Scripts/LevelData.gd"
+
 [display]
 
 window/size/width=576
