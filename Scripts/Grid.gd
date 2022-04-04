@@ -90,6 +90,9 @@ func end_of_level(level):
 	if level == -1:
 		get_parent().get_node("GameOverContent").visible = true
 		get_parent().get_node("EndOfLevelAnimation").play("game_over_fade")
+		get_parent().get_node("PlayerInfo/CityBack/Particles2D").emitting = true
+		get_parent().get_node("PlayerInfo/CityBack").modulate = Color(0.5, 0.5, 0.5)
+		get_parent().get_node("PlayerInfo/CityFront").modulate = Color(0.5, 0.5, 0.5)
 	else:
 		get_parent().get_node("NextLevelContent").visible = true
 		get_parent().get_node("EndOfLevelAnimation").play("fade_out")

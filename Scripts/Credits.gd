@@ -1,6 +1,10 @@
 extends Control
 
 
+func _ready():
+	$CreditsAnimation.play("fade_in")
+
+
 func _on_BackButton_pressed():
 	$CreditsAnimation.play("fade_out")
 

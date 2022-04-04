@@ -1,8 +1,23 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Scripts/Credits.gd" type="Script" id=2]
 [ext_resource path="res://Sprites/paper-bg.jpg" type="Texture" id=3]
 [ext_resource path="res://Sprites/ButtonLarge2.png" type="Texture" id=5]
+
+[sub_resource type="Animation" id=2]
+resource_name = "fade_in"
+tracks/0/type = "value"
+tracks/0/path = NodePath("CreditsInfo:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
 
 [sub_resource type="Animation" id=1]
 resource_name = "fade_out"
@@ -41,11 +56,16 @@ __meta__ = {
 }
 
 [node name="CreditsAnimation" type="AnimationPlayer" parent="."]
+anims/fade_in = SubResource( 2 )
 anims/fade_out = SubResource( 1 )
 
 [node name="CreditsInfo" type="Control" parent="."]
+modulate = Color( 1, 1, 1, 0 )
 margin_right = 40.0
 margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="RichTextLabel" type="RichTextLabel" parent="CreditsInfo"]
 margin_left = 40.0

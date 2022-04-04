@@ -75,6 +75,21 @@ func _ready():
 			"matches" : 100
 		},
 		"L6": {
+			"colours": ["pink", "blue", "green", "yellow", "red", "purple", "white"],
+			"empty": [
+				[0, 4],
+				[0, 5],
+				[1, 4],
+				[1, 5],
+				[6, 4],
+				[6, 5],
+				[7, 4],
+				[7, 5]
+			],
+			"timer": 99,
+			"matches" : 100
+		},
+		"L7": {
 			"colours": ["pink", "blue", "green", "yellow", "red", "purple", "white", "sky"],
 			"empty": [
 				[1, 1],
@@ -85,6 +100,21 @@ func _ready():
 				[4, 4],
 				[3, 5],
 				[4, 5]
+			],
+			"timer": 99,
+			"matches" : 100
+		},
+		"L8": {
+			"colours": ["pink", "blue", "green", "yellow", "red", "purple", "white", "sky"],
+			"empty": [
+				[0, 4],
+				[0, 5],
+				[1, 4],
+				[1, 5],
+				[6, 4],
+				[6, 5],
+				[7, 4],
+				[7, 5]
 			],
 			"timer": 99,
 			"matches" : 100
