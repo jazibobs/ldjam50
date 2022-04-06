@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/ldjam-cover.png-9f1034868212d3ae0005a164e90711cc.stex"
+path="res://.import/play-featured.png-ec846fb33970663a6f46d146a65909fb.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Screenshots/ldjam-cover.png"
-dest_files=[ "res://.import/ldjam-cover.png-9f1034868212d3ae0005a164e90711cc.stex" ]
+source_file="res://Screenshots/social/play-featured.png"
+dest_files=[ "res://.import/play-featured.png-ec846fb33970663a6f46d146a65909fb.stex" ]
 
 [params]
 

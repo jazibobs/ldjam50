@@ -13,7 +13,9 @@ config_version=4
 config/name="Monster Match"
 config/description="Match as much as you can to delay the destruction of your city."
 run/main_scene="res://Scenes/Title.tscn"
-config/icon="res://icon.png"
+boot_splash/image="res://jgr-icon.png"
+boot_splash/bg_color=Color( 0.0235294, 0.0235294, 0.0235294, 1 )
+config/icon="res://Screenshots/icons/html-icon-512.png"
 
 [autoload]
 
@@ -31,11 +33,11 @@ window/stretch/aspect="keep"
 
 [input]
 
-ui_select={
+ui_accept={
 "deadzone": 0.5,
 "events": [  ]
 }
-ui_accept={
+ui_select={
 "deadzone": 0.5,
 "events": [  ]
 }
